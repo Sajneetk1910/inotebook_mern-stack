@@ -5,7 +5,8 @@ const { body, validationResult } = require("express-validator");
 var bcrypt = require("bcrypt");
 var jwt = require("jsonwebtoken");
 const JWT_SECRET = "heysajneetkaur";
-//create user using POST "/api/auth" doesnt require auth
+var fetchuser=require('../middleware/fetchuser');
+// Route 1: create user using POST "/api/auth" doesnt require auth
 router.post(
   "/createuser",
   [
@@ -41,14 +42,14 @@ router.post(
         },
       };
       const authtoken = jwt.sign(data, JWT_SECRET);
-      res.json(authtoken);
+      res.json({authtoken});
     } catch (error) {
       console.log(error.message);
       res.status(500).send("some error occured");
     }
   }
 );
-//authenticate a user using POST "/api/auth/login"  No login required
+// Route 2:-authenticate a user using POST "/api/auth/login"  No login required
 
 router.post(
   "/login",
@@ -83,7 +84,7 @@ router.post(
         },
       };
       const authtoken = jwt.sign(data, JWT_SECRET);
-      res.JSON({ authtoken });
+      res.json({ authtoken });
     } catch (error) {
       console.error(error.message);
       res.status(500).send("Internal server error");
@@ -91,5 +92,17 @@ router.post(
   }
 );
 
+// Route-3 get user login details using post "/api/auht/getuser". login required
+
+router.post("/getuser", fetchuser, async (req, res) => {
+  try {
+    userId = req.user.id;
+    const user = await User.findById(userId).select("-password");
+    res.send(user);
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send("internal server error");
+  }
+});
+
 module.exports = router;
-// video 51
