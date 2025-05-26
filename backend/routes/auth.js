@@ -5,7 +5,7 @@ const { body, validationResult } = require("express-validator");
 var bcrypt = require("bcrypt");
 var jwt = require("jsonwebtoken");
 const JWT_SECRET = "heysajneetkaur";
-var fetchuser=require('../middleware/fetchuser');
+var fetchuser = require("../middleware/fetchuser");
 // Route 1: create user using POST "/api/auth" doesnt require auth
 router.post(
   "/createuser",
@@ -42,7 +42,7 @@ router.post(
         },
       };
       const authtoken = jwt.sign(data, JWT_SECRET);
-      res.json({authtoken});
+      res.json({ authtoken });
     } catch (error) {
       console.log(error.message);
       res.status(500).send("some error occured");
@@ -106,3 +106,5 @@ router.post("/getuser", fetchuser, async (req, res) => {
 });
 
 module.exports = router;
+
+
