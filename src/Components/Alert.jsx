@@ -1,6 +1,6 @@
 import React from "react";
 
-const Alet = (props) => {
+const Alert = (props) => {
   return (
     <div>
       <div className="alert alert-primary" role="alert">
@@ -10,4 +10,4 @@ const Alet = (props) => {
   );
 };
 
-export default Alet;
+export default Alert;
