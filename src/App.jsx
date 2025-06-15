@@ -1,10 +1,10 @@
+import "bootstrap/dist/css/bootstrap.min.css";
 import { Route, Routes } from "react-router-dom";
 import About from "./Components/About";
+import Alert from "./Components/Alert";
 import Home from "./Components/Home";
 import Navbar from "./Components/Navbar";
-import "bootstrap/dist/css/bootstrap.min.css";
 import NoteState from "./context/notes/NoteState";
-import Alert from "./Components/Alert";
 const App = () => {
   return (
     <>
@@ -25,4 +25,4 @@ const App = () => {
 export default App;
 
 
-// video 63
+// video 66
